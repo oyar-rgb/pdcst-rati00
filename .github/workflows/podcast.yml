@@ -38,7 +38,7 @@ jobs:
         run: python scripts/build.py
         env:
           BASE_URL: https://oyar-rgb.github.io/pdcst-rati00
-          FEED_TITLE: Rayos Audio-Feed
+          FEED_TITLE: Skillmarillion
           DEFAULT_VOICE: de-DE-KatjaNeural
 
       - uses: actions/configure-pages@v5

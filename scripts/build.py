@@ -36,6 +36,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EPISODES_DIR = ROOT / "episodes"
 SITE = ROOT / "_site"
 AUDIO = SITE / "audio"
+COVER = ROOT / "cover.jpg"  # optional: quadratisch, 1400-3000 px, RGB
 
 
 def parse_episode(path: Path):
@@ -85,6 +86,8 @@ def build():
             }
         )
     items.sort(key=lambda i: (i["pub"], i["slug"]), reverse=True)
+    if COVER.exists():
+        (SITE / "cover.jpg").write_bytes(COVER.read_bytes())
     write_feed(items)
     write_index(items)
     (SITE / "robots.txt").write_text("User-agent: *\nDisallow: /\n")
@@ -104,6 +107,12 @@ def write_feed(items):
         "<itunes:block>Yes</itunes:block>",
         f"<lastBuildDate>{format_datetime(datetime.now(timezone.utc))}</lastBuildDate>",
     ]
+    if COVER.exists():
+        parts += [
+            f'<itunes:image href="{e(BASE_URL)}/cover.jpg"/>',
+            f"<image><url>{e(BASE_URL)}/cover.jpg</url>"
+            f"<title>{e(FEED_TITLE)}</title><link>{e(BASE_URL)}/</link></image>",
+        ]
     for i in items:
         h, rem = divmod(i["seconds"], 3600)
         m, s = divmod(rem, 60)
