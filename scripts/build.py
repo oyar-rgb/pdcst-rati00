@@ -16,6 +16,7 @@ Ausgabe: _site/ (audio/*.mp3, feed.xml, index.html, robots.txt)
 import asyncio
 import html
 import os
+import subprocess
 import sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
@@ -61,6 +62,25 @@ async def render(text: str, voice: str, out: Path):
     await edge_tts.Communicate(text, voice=voice).save(str(out))
 
 
+def pub_date(txt: Path, meta: dict) -> datetime:
+    """Veröffentlichungszeitpunkt: erster Git-Commit der Episodendatei.
+
+    Stabil über Rebuilds hinweg (Feed-Reader sehen keine wandernden Daten) und
+    minutengenau, damit "gerade eben" auch als solches angezeigt wird. Fallback:
+    Front-Matter-Datum um 6 Uhr UTC (z. B. bei fehlender Git-Historie).
+    """
+    try:
+        iso = subprocess.run(
+            ["git", "log", "--follow", "--format=%aI", "--reverse", "--", str(txt)],
+            capture_output=True, text=True, cwd=ROOT, check=True,
+        ).stdout.strip().splitlines()[0]
+        return datetime.fromisoformat(iso).astimezone(timezone.utc)
+    except (subprocess.CalledProcessError, IndexError, ValueError):
+        return datetime.strptime(meta["date"], "%Y-%m-%d").replace(
+            hour=6, tzinfo=timezone.utc
+        )
+
+
 def build():
     AUDIO.mkdir(parents=True, exist_ok=True)
     items = []
@@ -71,9 +91,7 @@ def build():
         print(f"Rendere {slug} mit {meta['voice']} ...", flush=True)
         asyncio.run(render(body, meta["voice"], mp3))
         info = MP3(mp3).info
-        pub = datetime.strptime(meta["date"], "%Y-%m-%d").replace(
-            hour=6, tzinfo=timezone.utc
-        )
+        pub = pub_date(txt, meta)
         items.append(
             {
                 "title": meta["title"],

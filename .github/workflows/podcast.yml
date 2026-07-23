@@ -27,6 +27,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # volle Historie für Git-basierte pubDates
 
       - uses: actions/setup-python@v5
         with:
