@@ -1,0 +1,11 @@
+---
+title: Stimmprobe 3 – Florian (männlich, neuere Generation)
+date: 2026-07-23
+voice: de-DE-FlorianMultilingualNeural
+description: Deutsche Multilingual-Neural-Stimme Florian. Höre alle drei Proben und wähle deine Standardstimme.
+---
+Hallo Rayo, hier spricht Florian, die dritte von drei Stimmproben für deinen Podcast-Feed. Damit du die Qualität gut beurteilen kannst, folgt eine typische Passage.
+
+Künstliche Intelligenz verändert die Art, wie wir arbeiten. Eine Studie aus dem Jahr 2025 zeigt: Rund 67 Prozent der Befragten nutzen KI-Werkzeuge bereits täglich, etwa für Textzusammenfassungen oder zur Recherche. Besonders spannend ist der Trend zum sogenannten agentischen Arbeiten, bei dem Software ganze Arbeitsabläufe selbstständig ausführt. Kritiker der These wenden allerdings ein, dass die Produktivitätsgewinne schwer messbar bleiben.
+
+Ende der Stimmprobe. Wenn dir diese Stimme gefällt, sage einfach: Florian soll die Standardstimme werden.

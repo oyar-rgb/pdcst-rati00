@@ -1,0 +1,52 @@
+name: podcast
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "episodes/**"
+      - "scripts/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: pip install edge-tts mutagen
+
+      - name: Episoden rendern & Feed bauen
+        run: python scripts/build.py
+        env:
+          BASE_URL: https://oyar-rgb.github.io/pdcst-rati00
+          FEED_TITLE: Rayos Audio-Feed
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
