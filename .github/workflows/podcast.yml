@@ -39,6 +39,7 @@ jobs:
         env:
           BASE_URL: https://oyar-rgb.github.io/pdcst-rati00
           FEED_TITLE: Rayos Audio-Feed
+          DEFAULT_VOICE: de-DE-KatjaNeural
 
       - uses: actions/configure-pages@v5
         with:

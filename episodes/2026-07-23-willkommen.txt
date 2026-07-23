@@ -1,0 +1,10 @@
+---
+title: Willkommen bei deinem Audio-Feed
+date: 2026-07-23
+description: Kurze Einführung – so funktioniert deine Text-zu-Audio-Routine.
+---
+Hallo Rayo, willkommen bei deinem persönlichen Audio-Feed. Ab jetzt läuft deine Routine so: Du schickst Claude einen Link, ein Dokument oder einen Text mit dem Stichwort Podcast. Claude bereitet den Inhalt hörgerecht auf, und wenige Minuten später erscheint die fertige Episode automatisch hier in deiner Podcast-App – gesprochen von dieser Stimme, Katja, die du als Standard ausgewählt hast.
+
+Tabellen werden dabei in Fließtext übersetzt, Links und Fußnoten zusammengefasst, der Inhalt selbst bleibt originalgetreu. Später kommt auf Wunsch ein tägliches Morgen-Briefing aus deinen Arbeitsquellen dazu.
+
+Viel Spaß beim Hören!
